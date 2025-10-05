@@ -605,25 +605,25 @@ Our study shows that good sentiment analysis isn't just about picking the fancie
 
 ## References
 
-[1] Ebert, R. (2011). *Life Itself: A Memoir*. Grand Central Publishing.
+[1] Ebert, R. (2011). *Life Itself: A Memoir*. Grand Central Publishing. Available at: https://www.hachettebookgroup.com/titles/roger-ebert/life-itself/9780446584968/
 
 [2] Internet Movie Database (IMDb). (1990). "About IMDb: History and Information." Available at: https://www.imdb.com/
 
 [3] Dellarocas, C., Zhang, X. M., & Awad, N. F. (2007). "Exploring the value of online product reviews in forecasting sales: The case of motion pictures." *Journal of Interactive Marketing*, 21(4), 23-45.
 
-[4] Netflix Technology. (2016). "Recommender Systems at Netflix." Available at: https://research.netflix.com/
+[4] Netflix Technology Blog. (2016). "Netflix Recommendations: Beyond the 5 stars." Available at: https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-1-55838468f429
 
-[5] Liu, B. (2012). *Sentiment Analysis and Opinion Mining*. Morgan & Claypool Publishers.
+[5] Liu, B. (2012). *Sentiment Analysis and Opinion Mining*. Morgan & Claypool Publishers. Available at: https://doi.org/10.2200/S00416ED1V01Y201204HLT016
 
 [6] Pang, B., Lee, L., & Vaithyanathan, S. (2002). "Thumbs up?: sentiment classification using machine learning techniques." *Proceedings of the ACL-02 Conference on Empirical Methods in Natural Language Processing*. Available at: https://aclanthology.org/W02-1011/
 
-[7] Martineau, J., & Finin, T. (2009). "Delta TFIDF: An improved feature space for sentiment analysis." *Third International AAAI Conference on Weblogs and Social Media*.
+[7] Martineau, J., & Finin, T. (2009). "Delta TFIDF: An improved feature space for sentiment analysis." *Third International AAAI Conference on Weblogs and Social Media*. Available at: https://ojs.aaai.org/index.php/ICWSM/article/view/13979
 
 [8] Kim, Y. (2014). "Convolutional neural networks for sentence classification." *Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing*. Available at: https://aclanthology.org/D14-1181/
 
-[9] Hochreiter, S., & Schmidhuber, J. (1997). "Long short-term memory." *Neural Computation*, 9(8), 1735-1780.
+[9] Hochreiter, S., & Schmidhuber, J. (1997). "Long short-term memory." *Neural Computation*, 9(8), 1735-1780. Available at: https://doi.org/10.1162/neco.1997.9.8.1735
 
-[10] Graves, A., & Schmidhuber, J. (2005). "Framewise phoneme classification with bidirectional LSTM and other neural network architectures." *Neural Networks*, 18(5-6), 602-610.
+[10] Graves, A., & Schmidhuber, J. (2005). "Framewise phoneme classification with bidirectional LSTM and other neural network architectures." *Neural Networks*, 18(5-6), 602-610. Available at: https://doi.org/10.1016/j.neunet.2005.06.042
 
 [11] Howard, J., & Ruder, S. (2018). "Universal language model fine-tuning for text classification." *Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics*. Available at: https://aclanthology.org/P18-1031/
 
