@@ -8,25 +8,7 @@
 ## Team Members
 - **Benitha Uwituze Rutagengwa** - Data exploration, preprocessing pipeline, feature engineering
 - **Jeremiah Olaitan Agbaje** - Traditional ML model implementation and hyperparameter optimization  
-- **Tangue Kwizera** - Deep learning[4] Netflix Technology Blog. (2016). "Netflix Recommendations: Beyond the 5 stars." https://netflixtechblog.com/netflix-rec[5] Liu, B. (2012). *Sentiment Analysis and Opinion Mining*. Morgan & Claypool Publishers. https://doi.org/10.2200/S00416ED1V01Y201204HLT016
-
-[6] Pang, B., Lee, L., & Vaithyanathan, S. (2002). "Thumbs up?: sentiment classification using machine learning techniques." *Proceedings of the ACL-02 Commendations-beyond-the-5-stars-part-1-55838468f429
-
-[5] Liu, B. (2012). *Sentiment Analysis and Opinion Mining*. Morgan & Claypool Publishers. https://doi.org/10.2200/S00416ED1V01Y201204HLT016nference on Empirical Methods in Natural Language Proc[6] Pang, B., Lee, L., & Vaithyanathan, S. (2002). "Thumbs up?: sentiment classification using machine learning techniques." *Proceedings of the ACL-02 Conference on Empirical Methods in Natural Language Processing*. https://aclanthology.org/W02-1011/
-
-[7] Martineau, J., & Finin, T. (2009). "Delta TFIDF: An improved feature spacessing*. https://aclanthology.org/W02-1011/ for sentiment analysis."[7] Martineau, J., & Finin, T. (2009). "Delta TFIDF: An improved feature space for sentiment analysis." *Third International AAAI Conference on Weblogs and Social Media*. https://ojs.aaai.org/index.php/ICWSM/article/view/13979
-
-[8] Kim, Y. (2014). "Convolutional neural networks for sentence classification." *Proceedings of *Third International AAAI Conference on Weblogs and Social Media*. https://ojs.aaai.org/index.php/ICWSM/article/view/13979the 2014 Conference on Empirical Methods in Natural Language Proc[8] Kim, Y. (2014). "Convolutional neural networks for sentence classification." *Proceedings of the 2014 Conference on Empirical Methods in Natural Languagessing*. https://aclanthology.org/D14-1181/ Process[9] Hochreing*. https://aclanthology.org/D14-1181/
-
-[9] Hochreiter, S., & Schmidhuber, J. (1997). "Long short-term memory." *Neural Computation*, 9(8), 1735-1780. https://doi.org/10.1162/neco.1997.9.8.1735ter, S., & Schmidhuber, J. (1997). "Long short-term memory." *Neural Computatio[10] Graves, A., & Schmidhuber, J. (2005). "Framewise phoneme classification with bidirectional LSTM and other neural network architectures." *Neural Networks*, 18(5-6), 602-610. https://doi.org/10.1016/j.neunet.2005.06.042
-
-[11] Howard, J., & Ruder, S. (2018). "Un*, 9(8), 1735-1780. https://doi.org/10.1162/neco.1997.9.8.1735
-
-[10] Graves, A., & Schmidhuber, J. (2005). "Framewise phoneme classification with bidirectional LSTM and other neural network architectures." *Neural Networks*, 18(5-6), 602-610. https://doi.org/10.1016/j.neunet.2005.06.042iversal langu[11] Howage model fine-tuning for text classification." *Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics*. https://aclanthology.org/P18-1031/rd, J., & Ruder, S. (2018). "Universal language model fine-tuning for text classification." *Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics*. https://aclanthology.org/P18-1031/
-
-[12] Maas, A. L., Daly, R. E., Pham, P. T., Huang, D., Ng, A. Y., & Potts, C. (2011). "Learning word vectors for sentiment analysis." *Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics*. https://aclanthology.org/P11-1015/
-
-[13] IMDB Dataset. (2025). "IMDB Dataset of 50K Movie Reviews." Kaggle. https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviewsmplementation
+- **Tangue Kwizera** - Deep learning model implementation and analysis
 - **Afsa Umutoniwase** - Quality assurance, repository management, evaluation metrics
 
 ## Abstract
