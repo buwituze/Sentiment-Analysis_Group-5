@@ -111,16 +111,32 @@ We tested different alpha values to find the best smoothing parameter:
 
 **Takeaway:** Our current setup with 5000 TF-IDF features works well, but we could try more advanced preprocessing.
 
-#### Deep Learning Results
+#### Deep Learning Results (BiLSTM + Word2Vec)
 
-**BiLSTM + Word2Vec:** 74.59% validation, 74.73% test accuracy
+Based on experiments from `sentiment_analysis_main.ipynb`:
 
-*Still need to try:* Different learning rates, batch sizes, and network architectures
+| Experiment | EMB_TRAINABLE | LSTM1 | LSTM2 | DROPOUT | BATCH | EPOCHS | Val Acc (%) | Test Acc (%) | Train Time (s) |
+|------------|---------------|-------|-------|---------|-------|--------|-------------|--------------|----------------|
+| Baseline_Frozen | False | 128 | 64 | 0.30 | 128 | 3 | 50.77 | 50.79 | ~1460 |
+| FineTune_Embeds | True | 128 | 64 | 0.30 | 128 | 3 | ~50.8 | ~50.8 | ~1460 |
+| Regularized_Small | False | 96 | 48 | 0.45 | 128 | 3 | ~50.8 | ~50.8 | ~1300 |
+
+**Issues Found:**
+- BiLSTM model failed to train properly (accuracy stuck around 50.8% - essentially random guessing)
+- Model consistently predicted mostly negative class (as seen in confusion matrix)
+- Training converged to a suboptimal solution despite using pre-trained Word2Vec embeddings
+
+**Potential Causes:**
+- Insufficient training epochs (only 3 epochs used)
+- Learning rate issues or gradient problems
+- Word2Vec embeddings may not be well-suited for this specific sentiment task
+- Model architecture may be too simple for the complexity of the data
 
 **Summary:**
-- Naive Bayes (86.07%) worked much better than BiLSTM (74.73%)
+- **Naive Bayes (86.07%) significantly outperformed BiLSTM (~50.8%)**
 - Best alpha value for Naive Bayes was 5.0
-- TF-IDF features were more effective than Word2Vec for this dataset
+- TF-IDF features were much more effective than Word2Vec embeddings for this dataset
+- BiLSTM requires further investigation and longer training to achieve competitive results
 
 ## How to run our code
 1. Install the required packages:

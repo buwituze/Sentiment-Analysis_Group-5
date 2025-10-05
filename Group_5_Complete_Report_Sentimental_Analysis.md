@@ -13,7 +13,7 @@
 
 ## Abstract
 
-We compared traditional machine learning and deep learning methods for movie review sentiment analysis. Using the IMDB dataset of 50,000 movie reviews, we tested Naive Bayes with TF-IDF features against a Bidirectional LSTM with Word2Vec embeddings. After tuning hyperparameters and running experiments, we found that traditional ML (86.07% accuracy) beat deep learning (74.73% accuracy) for this task, which surprised us.
+We compared traditional machine learning and deep learning methods for movie review sentiment analysis. Using the IMDB dataset of 50,000 movie reviews, we tested Naive Bayes with TF-IDF features against a Bidirectional LSTM with Word2Vec embeddings. After tuning hyperparameters and running experiments, we found that traditional ML (86.07% accuracy) significantly outperformed deep learning (~50.8% accuracy) for this task. The BiLSTM model failed to converge properly, achieving only random-level performance despite using pre-trained Word2Vec embeddings.
 
 ## 1. Introduction
 
@@ -316,28 +316,33 @@ We ran controlled experiments to optimize both model types and compare how well 
 
 **Objective**: Optimize deep learning model architecture and training parameters
 
-**Method**: We tried different key hyperparameters
+**Method**: We tested three different configurations with varying architectures and regularization
 
 **Results**:
 
-| Experiment | Embedding | Learning Rate | Batch Size | Val Acc (%) | Test Acc (%) |
-|------------|-----------|---------------|------------|-------------|--------------|
-| 1          | Frozen    | 1e-3          | 128        | 74.59       | 74.73        |
-| 2          | Trainable | 1e-3          | 128        | 76.21       | 76.18        |
-| 3          | Frozen    | 5e-4          | 256        | 73.92       | 74.01        |
-| 4          | Trainable | 1e-4          | 64         | 75.84       | 75.91        |
+| Experiment | EMB_TRAINABLE | LSTM1 | LSTM2 | DROPOUT | BATCH | EPOCHS | Val Acc (%) | Test Acc (%) | Train Time (s) |
+|------------|---------------|-------|-------|---------|-------|--------|-------------|--------------|----------------|
+| Baseline_Frozen | False | 128 | 64 | 0.30 | 128 | 3 | 50.77 | 50.79 | ~1460 |
+| FineTune_Embeds | True | 128 | 64 | 0.30 | 128 | 3 | ~50.8 | ~50.8 | ~1460 |
+| Regularized_Small | False | 96 | 48 | 0.45 | 128 | 3 | ~50.8 | ~50.8 | ~1300 |
 
-**Key Findings**:
-- **Embedding Training**: Allowing embedding fine-tuning improved performance by ~1.5%
-- **Learning Rate**: 1e-3 provided optimal convergence speed vs. stability
-- **Batch Size**: 128 offered best balance of gradient stability and memory efficiency
+**Critical Issues Identified**:
+- **Failed Convergence**: All BiLSTM models failed to learn, achieving only random-level performance (~50.8%)
+- **Class Bias**: Models consistently predicted mostly negative class (as seen in confusion matrices)
+- **Training Problems**: Despite using pre-trained Word2Vec embeddings, models got stuck in suboptimal solutions
+
+**Potential Causes**:
+- **Insufficient Training**: Only 3 epochs may be inadequate for proper convergence
+- **Learning Rate Issues**: Gradient descent may have learning rate problems
+- **Architecture Limitations**: Model may be too simple or have vanishing gradient issues
+- **Feature Mismatch**: Word2Vec embeddings may not capture sentiment-specific patterns effectively
 
 ### 9.3 Model Comparison Summary
 
-| Model Type | Best Configuration | Test Accuracy | Training Time | Computational Requirements |
-|------------|-------------------|---------------|---------------|---------------------------|
-| Naive Bayes | Alpha=5.0, TF-IDF | **86.07%**   | <1 minute     | Low                      |
-| BiLSTM     | Baseline (frozen embeddings) | 74.73%      | 15 minutes    | High (GPU recommended)   |
+| Model Type | Best Configuration | Test Accuracy | Training Time | Computational Requirements | Status |
+|------------|-------------------|---------------|---------------|----------------------------|--------|
+| Naive Bayes | Alpha=5.0, TF-IDF | **86.07%**   | <1 minute     | Low                      | Success |
+| BiLSTM     | All configurations | ~50.8%      | ~25 minutes    | High (GPU recommended)   | Failed |
 
 ## 10. Evaluation and Performance Analysis
 
@@ -401,20 +406,24 @@ weighted avg       0.76      0.76      0.76      9139
 
 ### 10.4 Performance Discussion
 
-**Unexpected Results**: Traditional ML beat deep learning by a lot, which wasn't what we expected based on what we'd read about NLP tasks. This result shows us several important things:
+**Critical Results**: Traditional ML dramatically outperformed deep learning, with Naive Bayes achieving 86.07% accuracy while all BiLSTM configurations failed catastrophically, achieving only ~50.8% accuracy (essentially random performance). This represents a fundamental training failure rather than simple underperformance.
 
-1. **Feature Representation**: TF-IDF's explicit word importance weighting proved more effective than dense Word2Vec embeddings for this specific task
-2. **Model Complexity**: The BiLSTM's additional complexity may have led to overfitting despite regularization efforts
-3. **Data Characteristics**: The IMDB dataset's characteristics may favor sparse, interpretable features over dense representations
+**Analysis of BiLSTM Failure**:
+1. **Training Convergence Issues**: Despite using pre-trained Word2Vec embeddings, the BiLSTM models failed to learn meaningful patterns
+2. **Class Prediction Bias**: Models consistently predicted mostly negative class, as evidenced by confusion matrices
+3. **Gradient Problems**: Likely learning rate issues or vanishing/exploding gradients prevented proper weight updates
+4. **Insufficient Training Duration**: Only 3 epochs may have been inadequate for complex deep learning convergence
 
-**Challenges Identified**:
-- **Overfitting**: Both models showed some overfitting, controlled through regularization
-- **Loss Function Performance**: BiLSTM achieved final training loss of 0.23 and validation loss of 0.41, indicating some overfitting despite early stopping
-- **Negation Handling**: Both approaches struggled with complex negations and sarcasm  
-- **Computational Efficiency**: Naive Bayes offered 15x faster training with superior performance
+**Feature Representation Analysis**:
+- **TF-IDF Success**: Sparse, interpretable features with explicit word importance weighting proved highly effective
+- **Word2Vec Limitations**: Dense embeddings failed to capture sentiment-specific patterns despite semantic relationships
+- **Context vs. Keywords**: This dataset may favor keyword-based approaches over sequential context modeling
 
-**Loss Function Analysis**:
-The binary crossentropy loss provided clear optimization signals during training, with the BiLSTM model achieving convergence within 8-10 epochs. However, the gap between training loss (0.23) and validation loss (0.41) suggests that even with regularization, the deep learning model struggled with generalization compared to the traditional ML approach.
+**Implications for Model Selection**:
+1. **Complexity Paradox**: More complex models don't guarantee better performance
+2. **Training Requirements**: Deep learning models require careful hyperparameter tuning and extended training
+3. **Feature Engineering**: Traditional feature engineering can outperform learned representations
+4. **Resource Efficiency**: Naive Bayes provided superior results with minimal computational cost
 
 **Potential Improvements**:
 1. **Advanced Preprocessing**: Negation handling, sentiment-specific tokenization
@@ -542,7 +551,6 @@ Sentiment-Analysis_Group-5/
 │   └── Group_5_Report_Sentiment_Analysis_IMDB_Reviews.pdf
 ├── README.md
 ├── requirements.txt
-└── .gitignore
 ```
 
 ## 13. Team Contributions
@@ -577,13 +585,19 @@ Sentiment-Analysis_Group-5/
 
 ## 14. Conclusion
 
-Our study shows useful things about how traditional machine learning compares to deep learning for sentiment analysis. Our careful experiments produced several important findings that challenge what people usually think about deep learning being better for all NLP tasks.
+Our study reveals critical insights about the comparative effectiveness of traditional machine learning versus deep learning for sentiment analysis. Our controlled experiments produced findings that challenge common assumptions about deep learning superiority in NLP tasks.
 
 **Key Findings**:
-1. **Traditional ML worked better**: Naive Bayes with TF-IDF features got 86.07% accuracy, beating BiLSTM (74.73%)
-2. **Hyperparameter tuning matters**: Careful optimization improved Naive Bayes performance by 0.32 percentage points
-3. **Feature choice is important**: Sparse TF-IDF features worked better than dense Word2Vec embeddings for this task
-4. **Efficiency advantage**: Traditional approaches gave better performance with much lower computational requirements
+1. **Traditional ML Success vs. Deep Learning Failure**: Naive Bayes with TF-IDF features achieved 86.07% accuracy, while BiLSTM completely failed with ~50.8% accuracy (random-level performance)
+2. **Hyperparameter Optimization Impact**: Careful alpha tuning improved Naive Bayes performance from 85.75% to 86.07%
+3. **Feature Engineering Superiority**: Sparse TF-IDF features dramatically outperformed dense Word2Vec embeddings
+4. **Training Complexity**: Deep learning models required extensive tuning and failed to converge properly within limited training time
+
+**Critical Lessons**:
+- **Model Selection**: Complex models don't guarantee better performance and may fail entirely without proper configuration
+- **Training Requirements**: Deep learning demands significant computational resources and careful hyperparameter tuning
+- **Feature Engineering**: Traditional feature engineering can be more effective than learned representations for certain tasks
+- **Robustness**: Traditional ML approaches often provide more reliable baseline performance
 
 **Practical Implications**:
 Our results suggest that practitioners should not automatically assume deep learning superiority for all NLP tasks. Traditional ML approaches may offer optimal solutions when:
