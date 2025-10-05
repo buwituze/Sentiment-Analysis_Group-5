@@ -1,6 +1,6 @@
 # Sentiment Analysis Project - Group 5
 
-## Project ove## Data splits
+## Project Data splits
 We split the data to keep the same ratio of positive/negative reviews:
 - Training: 32,899 samples (72%)
 - Validation: 3,656 samples (8%)
@@ -145,4 +145,4 @@ The main parameters you can change:
 - Save trained models for future use
 
 ## References
-- IMDB Dataset of 50K Movie Reviews (Kaggle)
+- IMDB Dataset of 50K Movie Reviews (Kaggle), https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews?resource=download&select=IMDB+Dataset.csv
